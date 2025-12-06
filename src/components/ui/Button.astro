@@ -1,0 +1,121 @@
+---
+const { class: className, primary, secondary } = Astro.props;
+---
+
+<button
+  style={`--background-color: ${primary ? "#fff" : "#000"}`}
+  data-variant={primary ? "primary" : "secondary"}
+  class:list={[
+    {
+      "bg-brand-white": primary,
+    },
+    {
+      "bg-brand-black": secondary,
+    },
+    "py-4 px-12 flex-1 rounded-full relative cursor-pointer overflow-hidden",
+    className,
+  ]}
+>
+  <span style={`--color: ${primary ? "#000" : "#fff"}`}><slot /></span>
+</button>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const buttons = document.querySelectorAll("button");
+    buttons.forEach((button) => {
+      const span = button.children[0] as HTMLSpanElement;
+      const variant = button.dataset.variant;
+      console.log({ span });
+
+      button?.addEventListener("mouseenter", (e) => {
+        const rect = button?.getBoundingClientRect();
+        // console.log(rect);
+        const x = e.clientX - (rect?.x || 0);
+        const y = e.clientY - (rect?.y || 0);
+
+        console.log({ rect, y, x });
+
+        // set positiont to clip-path
+        button.style.setProperty("--top", `${y}px`);
+        button.style.setProperty("--left", `${x}px`);
+        button.style.setProperty("--scale", "200");
+        button.style.setProperty(
+          "--clip-color",
+          `${variant === "primary" ? "#000" : "#fff"}`
+        );
+
+        // set button background-color
+        if (variant === "primary") {
+          span.style.setProperty("--color", "#fff");
+        } else {
+          span.style.setProperty("--color", "#000");
+        }
+      });
+
+      // leave the button - reset values
+      button?.addEventListener("mouseleave", (e) => {
+        const rect = button?.getBoundingClientRect();
+        // console.log(rect);
+        const x = e.clientX - (rect?.x || 0);
+        const y = e.clientY - (rect?.y || 0);
+
+        console.log({ rect, y, x });
+
+        // set positiont to clip-path
+        button.style.setProperty("--top", `${y}px`);
+        button.style.setProperty("--left", `${x}px`);
+        button.style.setProperty("--scale", "0");
+
+        if (variant === "primary") span.style.setProperty("--color", "#000");
+        else span.style.setProperty("--color", "#fff");
+      });
+    });
+  });
+</script>
+
+<style>
+  button::before {
+    content: "";
+    position: absolute;
+    background-color: var(--background-color);
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    transition-property: transform, color;
+    transition-duration: 1s;
+    backface-visibility: hidden;
+
+    top: 0;
+    left: 0;
+  }
+
+  button {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: transparent;
+  }
+
+  button::after {
+    content: "";
+    position: absolute;
+    background-color: var(--clip-color);
+    width: 12px;
+    height: 12px;
+    border-radius: calc(infinity * 1px);
+    clip-path: circle(16.1% at 50% 50%);
+    pointer-events: none;
+    transition-property: transform, color;
+    transition-duration: 0.8s;
+    transform: scale(var(--scale));
+
+    top: var(--top);
+    left: var(--left);
+  }
+
+  button > span {
+    position: relative;
+    background-color: transparent;
+    transition: color 0.6s;
+    color: var(--color);
+    z-index: 2;
+  }
+</style>

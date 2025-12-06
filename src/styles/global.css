@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+:root {
+  --black: #000;
+  --white: #fff;
+  --white0: #ffffff00;
+  --grey: #b9b9c7;
+  --dark: #141414;
+  --bg-grey: #f5f5f5;
+  --bg-grey0: #f5f5f500;
+  --pink: #ff31ab;
+  --pink0: #ff31ab00;
+  --yellow: #fbff3e;
+  --block: #141414;
+  --percent: 0;
+  --telegram: #32b6f8;
+  --whatsapp: #43d56c;
+  --red: #f00;
+  --side-padding: clamp(20px, 3.75rem, 60px);
+  --vert-padding: clamp(80px, 12.5rem, 200px);
+  --distance: clamp(80px, 12.5rem, 200px);
+  --header: 92px;
+  --font: Sherika, -apple-system, system-ui, "sans-serif";
+  --delay: 0.1s;
+  --delay2: 0s;
+}
+
+@theme {
+  --color-brand-black: #000;
+  --color-brand-white: #fff;
+  --color-brand-white0: #ffffff00;
+  --color-brand-grey: #b9b9c7;
+  --color-brand-dark: #141414;
+  --color-brand-grey: #f5f5f5;
+  --color-brand-grey0: #f5f5f500;
+  --color-brand-pink: #ff31ab;
+  --color-brand-pink0: #ff31ab00;
+  --color-brand-yellow: #fbff3e;
+  --color-brand-block: #141414;
+  --color-brand-percent: 0;
+  --color-brand-telegram: #32b6f8;
+  --color-brand-whatsapp: #43d56c;
+  --color-brand-red: #f00;
+}

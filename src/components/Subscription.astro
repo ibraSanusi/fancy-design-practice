@@ -1,0 +1,209 @@
+---
+import Button from "./ui/Button.astro";
+---
+
+<section
+  id="subscriptions"
+  class="bg-brand-black w-screen h-auto box-border relative"
+>
+  <div class="py-20 pb-0 px-18">
+    <h1 class="max-w-[12ch] text-7xl text-wrap">
+      Let's start right now — it's incredibly simple!
+    </h1>
+  </div>
+
+  <div class="sticky top-0 flex gap-8 py-30 px-18 h-lvh">
+    <div id="subscriptions-scrollbar"></div>
+
+    <ul id="subscription-list" class="flex flex-col">
+      <li class="flex flex-col gap-2.5 flex-1">
+        <span class="text-[71px] leading-none max-w-[12ch] w-full"
+          >Start Subscription</span
+        >
+        <span class="text-2xl">Just book a call</span>
+      </li>
+      <li class="flex flex-col gap-2.5 flex-1">
+        <span class="text-[71px] max-w-[13ch] w-full">Describe the task</span>
+        <span class="text-2xl">Tell us what you need</span>
+      </li>
+      <li class="flex flex-col gap-2.5 flex-1">
+        <span class="text-[71px] max-w-[12ch] w-full">Get Designs</span>
+        <span class="text-2xl">Start receiving drafts in 48 hrs</span>
+      </li>
+
+      <div class="mt-0 flex gap-4">
+        <Button primary>Book a call</Button>
+        <Button secondary>Price</Button>
+      </div>
+    </ul>
+
+    <div class="flex flex-1 justify-center items-center">
+      <div
+        id="subscription-images"
+        class="flex flex-1 justify-center items-center"
+      >
+        <img
+          class="w-[600px]"
+          src="/images/startups-steps-cube1.png"
+          alt="Imagen de cubo sin decoración."
+        />
+        <img
+          id="cube-whit-texture"
+          class="absolute w-[554px] opacity-0"
+          src="/images/startups-steps-cube2.png"
+          alt="Imagen de cubo con decoración."
+        />
+      </div>
+
+      <video
+        id="icecream"
+        class="absolute w-[663px] opacity-0"
+        src="/images/Icecream_pack.webm"
+        autoplay
+        muted
+        loop
+        poster="/images/icecream2.webp"></video>
+      <!-- <img
+        id="icecream"
+        class="absolute w-[663px] opacity-0"
+        src="/images/icecream2.webp"
+        alt="Imagen de cubo con decoración."
+      /> -->
+    </div>
+  </div>
+
+  <section class="h-screen w-screen bg-black"></section>
+  <section class="h-screen w-screen bg-black"></section>
+  <section class="h-screen w-screen bg-black"></section>
+  <section class="h-screen w-screen bg-black"></section>
+</section>
+
+<style>
+  #subscriptions-scrollbar {
+    width: 4px;
+    background-color: var(--color-brand-grey);
+    border-radius: 4px;
+    position: relative;
+
+    &::after {
+      content: "";
+      width: 8px;
+      height: 2%;
+      background-color: var(--color-brand-pink);
+      border-radius: 4px;
+      position: absolute;
+      top: 0;
+      left: -50%;
+      z-index: 1;
+      transition: height;
+
+      animation: subscription-scroll linear both;
+      animation-timeline: view();
+      animation-range: contain 10% exit -25%;
+    }
+  }
+
+  #subscription-list {
+    & li {
+      opacity: 0.25;
+      animation: show-item linear forwards;
+      animation-timeline: view();
+    }
+
+    & li:nth-of-type(1) {
+      animation-range: entry 0% contain 50%;
+    }
+
+    & li:nth-of-type(2) {
+      animation-range: entry 25% contain 75%;
+    }
+
+    & li:nth-of-type(3) {
+      animation-range: entry 75% contain 95%;
+    }
+  }
+
+  #cube-whit-texture {
+    animation: show-cube ease-out forwards;
+    animation-timeline: view();
+    animation-range: contain 30% contain 40%;
+  }
+
+  #subscription-images {
+    animation: fade-out linear both;
+    animation-timeline: view();
+    animation-range: contain 50% contain 65%;
+  }
+
+  #icecream {
+    animation: show-icecream linear both;
+    animation-timeline: view();
+    animation-range: contain 70% contain 90%;
+  }
+
+  @keyframes subscription-scroll {
+    from {
+      height: 2%;
+    }
+
+    to {
+      height: 100%;
+    }
+  }
+
+  @keyframes show-item {
+    from {
+      opacity: 0.25;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes show-cube {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fade-out {
+    from {
+      scale: 1;
+      opacity: 1;
+    }
+
+    to {
+      scale: 0.5;
+      opacity: 0;
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      scale: 0;
+      opacity: 0;
+    }
+
+    to {
+      scale: 1;
+      opacity: 1;
+    }
+  }
+
+  @keyframes show-icecream {
+    from {
+      opacity: 0;
+      scale: 0.8;
+    }
+
+    to {
+      opacity: 1;
+      scale: 1.2;
+    }
+  }
+</style>
