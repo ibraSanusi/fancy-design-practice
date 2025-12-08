@@ -1,12 +1,35 @@
-<header class="fixed top-0 p-6 bg-brand-black/20 z-50 w-full">
-  <div class="max-w-7xl flex w-full justify-between items-center mx-auto">
-    <img
-      class="w-40"
-      src="/images/logo-white.svg"
-      alt="Imagen del logo de fancy."
-    />
+---
+import BarIcon from "./ui/icons/BarIcon.astro";
+import CloseIcon from "./ui/icons/CloseIcon.astro";
+---
 
-    <ul class="flex flex-row gap-12">
+<div
+  id="header-wrapper"
+  class="fixed z-50 p-4 lg:p-0 w-full group h-[72px] transition-[height] duration-700"
+>
+  <header
+    class="px-2.5 h-[72px] overflow-y-hidden py-4 transition-[height_border-radius] duration-700 bg-brand-black/20 max-w-5xl lg:max-w-none rounded-[50px] lg:rounded-none flex w-full justify-between items-center mx-auto"
+  >
+    <div
+      class="group-[.open]:flex group-[.open]:flex-row group-[.open]:justify-between group-[.open]:w-full"
+    >
+      <img
+        class="w-40"
+        src="/images/logo-white.svg"
+        alt="Imagen del logo de fancy."
+      />
+
+      <button
+        id="close-menu-button"
+        class="hidden size-14 rounded-full bg-brand-black/10 backdrop-blur-2xl relative lg:hidden group-[.open]:block"
+      >
+        <CloseIcon
+          class="top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 absolute size-6"
+        />
+      </button>
+    </div>
+
+    <ul class="hidden lg:flex lg:flex-row lg:gap-12">
       <li>Subscription</li>
       <li>Services</li>
       <li>Pricing</li>
@@ -15,15 +38,83 @@
       <li>FAQ</li>
     </ul>
 
-    <div class="max-w-28">
-      <button>Let's talk</button>
-    </div>
-  </div>
-</header>
+    <button
+      id="call-to-action"
+      class="hidden lg:block py-4 bg-brand-white text-black rounded-full group-[.open]:w-full lg:px-4.5 lg:py-2.5"
+      >Let's talk</button
+    >
+
+    <button
+      id="hamburger-button"
+      class="size-14 rounded-full bg-brand-black/10 backdrop-blur-2xl relative lg:hidden"
+    >
+      <BarIcon
+        class="top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 absolute size-6"
+      />
+    </button>
+  </header>
+</div>
+
+<!-- <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const menuButton = document.querySelector(
+      "#hamburger-button"
+    ) as HTMLButtonElement;
+    const headerWrapper = document.querySelector(
+      "#header-wrapper"
+    ) as HTMLDivElement;
+
+    // open menu
+    menuButton?.addEventListener("click", () => {
+      headerWrapper.classList.add("open");
+    });
+
+    // close menu
+    const closeMenuButton = document.querySelector(
+      "#close-menu-button"
+    ) as HTMLButtonElement;
+    closeMenuButton?.addEventListener("click", () => {
+      headerWrapper.classList.remove("open");
+    });
+  });
+</script> -->
 
 <style>
   header {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+  }
+
+  #header-wrapper.open {
+    /* transition: height 1s; */
+    height: 100dvh;
+  }
+
+  #header-wrapper.open header {
+    height: 100%;
+    border-radius: 45px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    & ul {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      align-items: center;
+    }
+    & ul li {
+      font-size: 30px;
+      font-weight: 600;
+    }
+
+    & #hamburger-button {
+      display: none;
+    }
+
+    & #call-to-action {
+      display: block;
+    }
   }
 </style>
