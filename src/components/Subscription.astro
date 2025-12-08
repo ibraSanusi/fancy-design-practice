@@ -12,7 +12,65 @@ import Button from "./ui/Button.astro";
     </h1>
   </div>
 
-  <section class="sticky top-0 flex flex-col gap-8 py-30 px-18 h-lvh w-screen">
+  <!-- Desktop -->
+  <section class="hidden sticky top-0 lg:flex gap-8 py-30 px-18 h-lvh">
+    <div id="subscriptions-scrollbar"></div>
+
+    <ul id="subscription-list" class="flex flex-col">
+      <li class="flex flex-col gap-2.5 flex-1">
+        <span class="text-[71px] leading-none max-w-[12ch] w-full"
+          >Start Subscription</span
+        >
+        <span class="text-2xl">Just book a call</span>
+      </li>
+      <li class="flex flex-col gap-2.5 flex-1">
+        <span class="text-[71px] max-w-[13ch] w-full">Describe the task</span>
+        <span class="text-2xl">Tell us what you need</span>
+      </li>
+      <li class="flex flex-col gap-2.5 flex-1">
+        <span class="text-[71px] max-w-[12ch] w-full">Get Designs</span>
+        <span class="text-2xl">Start receiving drafts in 48 hrs</span>
+      </li>
+
+      <div class="mt-0 flex gap-4">
+        <Button primary>Book a call</Button>
+        <Button secondary>Price</Button>
+      </div>
+    </ul>
+
+    <div class="flex flex-1 justify-center items-center">
+      <div
+        id="subscription-images"
+        class="flex flex-1 justify-center items-center"
+      >
+        <img
+          class="w-[600px]"
+          src="/images/startups-steps-cube1.png"
+          alt="Imagen de cubo sin decoración."
+        />
+        <img
+          id="cube-whit-texture"
+          class="absolute w-[554px] opacity-0"
+          src="/images/startups-steps-cube2.png"
+          alt="Imagen de cubo con decoración."
+        />
+      </div>
+
+      <video
+        id="icecream"
+        class="absolute w-[663px] opacity-0"
+        src="/images/Icecream_pack.webm"
+        autoplay
+        muted
+        loop
+        poster="/images/icecream2.webp"></video>
+    </div>
+  </section>
+
+  <!-- Móvil -->
+  <section
+    class="sticky top-0 flex flex-col gap-8 py-30 px-18 h-lvh w-screen lg:hidden"
+  >
     <!-- Imágenes -->
     <div class="flex flex-1 justify-center items-center">
       <div
@@ -46,27 +104,32 @@ import Button from "./ui/Button.astro";
     <div id="subscriptions-scrollbar-horizontal"></div>
 
     <!-- Subscription description -->
-    <!-- <ul id="subscription-list" class="flex flex-col">
-      <li class="flex flex-col gap-2.5 flex-1">
-        <span class="text-[71px] leading-none max-w-[12ch] w-full"
-          >Start Subscription</span
-        >
-        <span class="text-2xl">Just book a call</span>
-      </li>
-      <li class="flex flex-col gap-2.5 flex-1">
-        <span class="text-[71px] max-w-[13ch] w-full">Describe the task</span>
-        <span class="text-2xl">Tell us what you need</span>
-      </li>
-      <li class="flex flex-col gap-2.5 flex-1">
-        <span class="text-[71px] max-w-[12ch] w-full">Get Designs</span>
-        <span class="text-2xl">Start receiving drafts in 48 hrs</span>
-      </li>
+    <div class="relative w-auto">
+      <!-- <ul
+        id="subscription-list-hor"
+        class="flex flex-row gap-20 absolute top-0 w-full"
+      >
+        <li class="flex flex-col gap-2.5">
+          <span class="text-3xl w-full">Start Subscription</span>
+          <span class="text-xl text-nowrap">Just book a call</span>
+        </li>
+        <li class="flex flex-col gap-2.5">
+          <span class="text-3xl max-w-[13ch] w-full">Describe the task</span>
+          <span class="text-xl text-nowrap">Tell us what you need</span>
+        </li>
+        <li class="flex flex-col gap-2.5">
+          <span class="text-3xl w-full">Get Designs</span>
+          <span class="text-xl text-nowrap"
+            >Start receiving drafts in 48 hrs</span
+          >
+        </li>
 
-      <div class="mt-0 flex gap-4">
-        <Button primary>Book a call</Button>
-        <Button secondary>Price</Button>
-      </div>
-    </ul> -->
+        <div class="mt-0 flex gap-4">
+          <Button primary>Book a call</Button>
+          <Button secondary>Price</Button>
+        </div>
+      </ul> -->
+    </div>
   </section>
 
   <section class="h-screen w-screen bg-black"></section>
@@ -122,6 +185,29 @@ import Button from "./ui/Button.astro";
       animation: subscription-scroll-hor linear both;
       animation-timeline: view();
       animation-range: contain 10% exit -25%;
+    }
+  }
+
+  #subscription-list-hor {
+    animation: show-item-hor linear forwards;
+    animation-timeline: view();
+
+    & li {
+      opacity: 0.25;
+      animation: show-item linear forwards;
+      animation-timeline: view();
+    }
+
+    & li:nth-of-type(1) {
+      animation-range: entry 0% contain 50%;
+    }
+
+    & li:nth-of-type(2) {
+      animation-range: entry 25% contain 75%;
+    }
+
+    & li:nth-of-type(3) {
+      animation-range: entry 75% contain 95%;
     }
   }
 
@@ -190,6 +276,16 @@ import Button from "./ui/Button.astro";
 
     to {
       opacity: 1;
+    }
+  }
+
+  @keyframes show-item-hor {
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX(-100%);
     }
   }
 
